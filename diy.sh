@@ -9,10 +9,16 @@ git clone https://github.com/kmiit/Redmi_AX3000_immortalwrt temp_drivers
 
 # 2. Replace the official ipq50xx target with the community one
 # This provides the necessary DTS and Kernel Config for your router
-rm -rf target/linux/ipq50xx
-cp -r temp_drivers/target/linux/ipq50xx target/linux/
+echo "Replacing target/linux/qualcommax..."
+rm -rf target/linux/qualcommax
+cp -r temp_drivers/target/linux/qualcommax target/linux/
 
-# 3. Clean up
+# 3. Copy any custom packages kmiit provides (Optional but recommended)
+if [ -d "temp_drivers/package/kernel" ]; then
+    cp -r temp_drivers/package/kernel/* package/kernel/
+fi
+
+# 4. Clean up
 rm -rf temp_drivers
 
 
